@@ -5,13 +5,16 @@ Stackoverflow and Google Group discussions.
 
 **I'm a total noob so if you have suggestions I'd be glad to include them**
 
-### Basic Concepts
+## Usage
+You can use **requirements.txt** to install the packages, preferably in a virtualenv.
+Then you can simply run **multimodel.py**. The default port is set to 5002.
+
+## Basic Concepts
 - FieldList and FormField are used to nest one Form inside another
 - **`phones`** is a relation in the **`User Model`** creating a link to **`Phone entries`**.
 - **`PhoneForm`** deals with the Phone fields only
 - **`CombinedForm`** includes the **`User`** and **`Phone`** fields
 - The `CombinedForm` is populated through the `User` model and related `phones`
-
 
 ### Pain Points
 #### User Model
