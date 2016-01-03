@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi Model Dynamic Form</title>
+</head>
+<body>
+
+<div class="flashes">
+    {% for message in get_flashed_messages() %}
+    <h3>{{ message }}</h3>
+    {% endfor %}
+</div>
+
+<h2>Assign Phones to a User</h2>
+
+<form method="POST">
+    {{ form.username.label }}: {{ form.username }}
+
+    <div data-toggle="fieldset" id="phone-fieldset">
+         {{ form.phones.label }}  <button type="button" data-toggle="fieldset-add-row"
+                                          data-target="#phone-fieldset">+</button>
+        <table>
+            <tr>
+                <th>Number</th>
+                <th>Extension</th>
+                <th></th>
+            </tr>
+            {% for phone in form.phones %}
+                <tr data-toggle="fieldset-entry">
+                    <td>{{ phone.phone_number }}</td>
+                    <td>{{ phone.phone_name }}</td>
+                    <td><button type="button" data-toggle="fieldset-remove-row" id="phone-{{loop.index0}}-remove">-</button></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {{ form.hidden_tag() }}
+    {{ form.submit }}
+
+<h5> <a href="{{ url_for('index') }}">Home</a> </h5>
+
+<!-- just to display all potential errors -->
+{% if form.errors %}
+    <ul class="errors">
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+                <li>{{ form[field_name].label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+</form>
+
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="{{ url_for("static", filename="js/page.js") }}"></script>
+
+</body>
+</html>
