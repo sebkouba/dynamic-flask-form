@@ -51,7 +51,7 @@ class PhoneForm(NoCsrfForm):
     # this forms is never exposed so we can user the non CSRF version
     phone_number = StringField('Phone Number', validators=[DataRequired()])
     phone_name = StringField('Phone Description')
-    locations = FieldList(FormField(LocationForm, default=lambda: Location))
+    locations = FieldList(FormField(LocationForm, default=lambda: Location()))
 
 
 class CombinedForm(Form):
