@@ -3,6 +3,8 @@ Having struggled to find a workind example of a WTForm in Flask with
 a dynamic form, I created this one. It is cobbled together from a few
 Stackoverflow and Google Group discussions.
 
+**I'm a total noob so if you have suggestions I'd be glad to include them**
+
 ### Basic Concepts
 - FieldList and FormField are used to nest one Form inside another
 - **`phones`** is a relation in the **`User Model`** creating a link to **`Phone entries`**.
@@ -24,13 +26,14 @@ I chose to subclass wtforms Form which does not require the token.
 
 #### CombinedForm
 `phones = FieldList(FormField(PhoneForm, default=lambda: Phone()))`
+
 That is the line of code where it all broke down for me. Once there is a working
 example it's hopefully not so mysterious. Setting the default to `lambda: Phone()`
 was difficult for me to get to (see [Fixing populate_obj](https://groups.google.com/forum/#!msg/wtforms/5KQvYdLFiKE/TSgHIxmsI8wJ))
 
 #### Index
-Simply loading one User and taking it from there is a means to focus on the actual
-problem. Messing with a dropdown for different users just distracts from the main
+I just load the one user from the db, no messing around.
+Playing with a dropdown for different users just distracts from the main
 point here.
 
 I'm not sure if aassing a new Phone instance where the User has no phones is the
