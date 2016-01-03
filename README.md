@@ -3,7 +3,14 @@ Having struggled to find a workind example of a WTForm in Flask with
 a dynamic form, I created this one. It is cobbled together from a few
 Stackoverflow and Google Group discussions.
 
-**I'm a total noob so if you have suggestions I'd be glad to include them**
+**I'm a total noob so if you have suggestions I'd be glad to include them!**
+
+## What does it do?
+- Render a form with two models
+- Save and load the related models
+
+**This means you can have a form with dynamically created fields which are
+saved and loaded properly.**
 
 ## Usage
 You can use **requirements.txt** to install the packages, preferably in a virtualenv.
