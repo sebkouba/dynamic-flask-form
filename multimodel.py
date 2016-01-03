@@ -32,13 +32,26 @@ class Phone(db.Model):
     user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))
     phone_number = db.Column(db.String(50))
     phone_name = db.Column(db.String(50))
+    locations = db.relationship('Location')
+
+
+class Location(db.Model):
+    __tablename__ = 'locations'
+    id = db.Column(db.Integer(), primary_key=True)
+    phone_id = db.Column(db.Integer(), db.ForeignKey('phones.id'))
+    descr = db.Column(db.String(50))
 
 
 # - - - Forms - - -
+class LocationForm(NoCsrfForm):
+    descr = StringField('Location Name')
+
+
 class PhoneForm(NoCsrfForm):
     # this forms is never exposed so we can user the non CSRF version
     phone_number = StringField('Phone Number', validators=[DataRequired()])
     phone_name = StringField('Phone Description')
+    locations = FieldList(FormField(LocationForm, default=lambda: Location))
 
 
 class CombinedForm(Form):
@@ -56,7 +69,10 @@ def index():
 
     # if User has no phones, provide an empty one so table is rendered
     if len(user.phones) == 0:
-        user.phones = [Phone(phone_number="example")]
+        phone = Phone(phone_number="example")
+        phone.locations = [Location(descr="Default Location POC")]
+        user.phones = [phone]
+
         flash("empty Phone provided")
 
     # else: forms loaded through db relation

@@ -24,12 +24,18 @@
             <tr>
                 <th>Number</th>
                 <th>Extension</th>
+                <th>Location</th>
                 <th></th>
             </tr>
             {% for phone in form.phones %}
                 <tr data-toggle="fieldset-entry">
                     <td>{{ phone.phone_number }}</td>
                     <td>{{ phone.phone_name }}</td>
+                    <td>
+                        {% for location in phone.locations %}
+                        {{ location.descr }}
+                        {% endfor %}
+                    </td>
                     <td><button type="button" data-toggle="fieldset-remove-row" id="phone-{{loop.index0}}-remove">-</button></td>
                 </tr>
             {% endfor %}
